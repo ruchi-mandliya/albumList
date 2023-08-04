@@ -1,24 +1,7 @@
-import { useState, useEffect } from "react";
-import { useAdd } from "../contextApi/AddFunctionality";
-import axios from "axios";
+import React from "react";
 
-const UpdateAlbum = async (albumId, Title) => {
-  const [albums, setAlbums] = useAdd();
-  const updatedAlbums = albums.map((album) => {
-    if (album.id === albumId) {
-      return { ...album, title: Title };
-    }
-    return album;
-  });
-
-  try {
-    await axios.put(`https://jsonplaceholder.typicode.com/albums/${albumId}`, {
-      title: Title,
-    });
-    setAlbums(updatedAlbums);
-  } catch (error) {
-    console.error("Error updating album:", error);
-  }
+const UpdateAlbum = () => {
+  return <div>UpdateAlbum</div>;
 };
 
 export default UpdateAlbum;

@@ -2,25 +2,22 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAdd } from "../contextApi/AddFunctionality";
+// import { useAdd } from "../contextApi/AddFunctionality";
 const CreateAlbum = () => {
-  const [albums, setAlbums] = useAdd();
+  const [albums, setAlbums] = useState({
+    // Generate a new ID
+    title: "",
+  });
   //   const [id, setId] = useState();
 
-  const [title, setTitle] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { title };
 
     try {
-      await axios.post(
-        "https://jsonplaceholder.typicode.com/albums",
-        JSON.stringify(data)
-      );
-      setAlbums([...albums, data]);
-      setTitle("");
+      await axios.post("https://jsonplaceholder.typicode.com/albums", albums);
+
       alert("Saved Successfully");
       navigate("/");
     } catch (error) {
@@ -38,8 +35,8 @@ const CreateAlbum = () => {
             <input
               type="text"
               autoFocus
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              name="title"
+              onChange={(e) => setAlbums({ ...albums, title: e.target.value })}
               className="form-control"
               placeholder="Enter Title "
               required

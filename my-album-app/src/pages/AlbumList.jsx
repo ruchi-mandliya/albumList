@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { useAdd } from "../contextApi/AddFunctionality";
-import { Link } from "react-router-dom";
+import axios from "axios";
 
 const AlbumList = () => {
-  const [albums, setAlbums] = useAdd();
+  const [albums, setAlbums] = useState([]);
 
-  // useEffect(() => {
-  //   fetchAlbums();
-  // }, []);
-  // const fetchAlbums = async () => {
-  //   const res = await axios.get("https://jsonplaceholder.typicode.com/albums");
-  //   setAlbums(res.data);
-  // };
+  useEffect(() => {
+    fetchAlbums();
+  }, []);
+  const fetchAlbums = async () => {
+    const res = await axios.get("https://jsonplaceholder.typicode.com/albums");
+    setAlbums(res.data);
+  };
 
   return (
     <div className="container" style={{ margin: "100px" }}>
@@ -36,13 +35,10 @@ const AlbumList = () => {
           >
             <div className="card-body d-flex flex-column">
               <h5 className="card-title">{album.title}</h5>
+              {/* <h5 className="card-title">{album.userID}</h5> */}
               <div className="d-grid gap-2 d-flex justify-content-center mt-auto">
-                <Link to="/updateAlbum">
-                  <button className="btn btn-primary me-md-2">Update</button>
-                </Link>
-                <Link to="/deleteAlbum">
-                  <button className="btn btn-primary me-md-2">Delete</button>
-                </Link>
+                <button className="btn btn-primary me-md-2">Update</button>
+                <button className="btn btn-primary me-md-2">Delete</button>
               </div>
             </div>
           </div>
