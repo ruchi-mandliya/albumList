@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div>
@@ -14,12 +15,14 @@ const Header = () => {
             <span className="coll">Collection</span>
           </a>
 
-          <button className="btn bg-warning bg-gradient" type="submit">
-            Add Album
-            <span className="icon">
-              <i className="fa-solid fa-square-plus"></i>
-            </span>
-          </button>
+          <Link to="/createAlbum" style={{ textDecoration: "none" }}>
+            <button className="btn bg-warning bg-gradient" type="submit">
+              Add Album
+              <span className="icon">
+                <i className="fa-solid fa-square-plus"></i>
+              </span>
+            </button>
+          </Link>
         </div>
       </nav>
     </div>
