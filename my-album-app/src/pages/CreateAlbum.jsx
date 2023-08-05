@@ -1,28 +1,33 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-// import { useAdd } from "../contextApi/AddFunctionality";
+import { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AddContext } from "../contextApi/AddFunctionality";
 const CreateAlbum = () => {
-  const [albums, setAlbums] = useState({
-    // Generate a new ID
-    title: "",
-  });
-  //   const [id, setId] = useState();
-
+  const { albums, addAlbum } = useContext(AddContext);
+  const [title, setTitle] = useState("");
+  const [userId, setUserId] = useState(1);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  //   //   const [id, setId] = useState();
+
+  const titleRef = useRef();
+  const userIdRef = useRef();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      await axios.post("https://jsonplaceholder.typicode.com/albums", albums);
+    const newAlbum = {
+      userId: userId, // Replace with desired user ID
+      id: albums.length + 1, // Generate a new ID
+      title: title,
+    };
 
-      alert("Saved Successfully");
-      navigate("/");
-    } catch (error) {
-      console.error("Error adding album:", error);
-    }
+    addAlbum(newAlbum);
+    alert("saved successfully");
+    navigate("/");
+
+    titleRef.current.value = "";
+    userIdRef.current.value = "";
   };
 
   return (
@@ -32,16 +37,30 @@ const CreateAlbum = () => {
           <h2 className="title1">Add Your Album</h2>
 
           <div className="mb-3">
+            <label htmlFor="title">Title:</label>
             <input
               type="text"
               autoFocus
-              name="title"
-              onChange={(e) => setAlbums({ ...albums, title: e.target.value })}
+              ref={titleRef}
+              onChange={(e) => setTitle(e.target.value)}
               className="form-control"
               placeholder="Enter Title "
               required
             />
           </div>
+          <div className="mb-3">
+            <label htmlFor="userId">UserId:</label>
+            <input
+              type="number"
+              autoFocus
+              ref={userIdRef}
+              onChange={(e) => setUserId(e.target.value)}
+              className="form-control"
+              placeholder="Enter Title "
+              required
+            />
+          </div>
+
           <div className="d-grid gap-2 d-md-flex justify-content-md-start">
             <button type="submit" className="btn btn-primary btn-lg">
               Save
