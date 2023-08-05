@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AddContext } from "../contextApi/AddFunctionality";
 
 const AlbumList = () => {
-  const { albums } = useContext(AddContext);
+  const { albums, deleteAlbum } = useContext(AddContext);
 
   // const fetchAlbums = async () => {
   //   const res = await axios.get("https://jsonplaceholder.typicode.com/albums");
@@ -41,9 +41,13 @@ const AlbumList = () => {
                   <Link to="/updateAlbum">
                     <button className="btn btn-primary me-md-2">Update</button>
                   </Link>
-                  <Link to="/deleteAlbum">
-                    <button className="btn btn-primary me-md-2">Delete</button>
-                  </Link>
+
+                  <button
+                    onClick={() => deleteAlbum(album.id)}
+                    className="btn btn-primary me-md-2"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
