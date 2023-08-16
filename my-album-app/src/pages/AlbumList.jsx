@@ -23,9 +23,9 @@ const AlbumList = () => {
         }}
       >
         {albums &&
-          albums.map((album) => (
+          albums.map((album, i) => (
             <div
-              key={album.id}
+              key={i}
               className="card"
               style={{
                 width: "18rem",
@@ -38,9 +38,14 @@ const AlbumList = () => {
                 <h6 className="card-title">{album.userId}</h6>
                 <h5 className="card-title">{album.title}</h5>
                 <div className="d-grid gap-2 d-flex justify-content-center mt-auto">
-                  <Link to="/updateAlbum">
+                  <Link to={`/readAlbum/${album.id}`}>
+                    <button className="btn btn-primary me-md-2">Details</button>
+                  </Link>
+                  <Link to={`/updateAlbum/${album.id}`}>
                     <button className="btn btn-primary me-md-2">Update</button>
                   </Link>
+
+                  {/* <button className="btn btn-primary me-md-2">Update</button> */}
 
                   <button
                     onClick={() => deleteAlbum(album.id)}

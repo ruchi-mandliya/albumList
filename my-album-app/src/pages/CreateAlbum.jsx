@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AddContext } from "../contextApi/AddFunctionality";
 const CreateAlbum = () => {
-  const { albums, addAlbum } = useContext(AddContext);
+  const { addAlbum } = useContext(AddContext);
   const [title, setTitle] = useState("");
   const [userId, setUserId] = useState(1);
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const CreateAlbum = () => {
 
     const newAlbum = {
       userId: userId, // Replace with desired user ID
-      id: albums.length + 1, // Generate a new ID
+      id: Date.now(), // Generate a new ID
       title: title,
     };
 

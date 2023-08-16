@@ -3,6 +3,7 @@ import Header from "./components/Header.jsx";
 import AlbumList from "./pages/AlbumList.jsx";
 import CreateAlbum from "./pages/CreateAlbum.jsx";
 import UpdateAlbum from "./pages/UpdateAlbum.jsx";
+import ReadAlbum from "./pages/ReadAlbum.jsx";
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AlbumList />} />
         <Route path="/createAlbum" element={<CreateAlbum />} />
-        <Route path="/updateAlbum" element={<UpdateAlbum />} />
+        <Route path="/updateAlbum/:id" element={<UpdateAlbum />} />
+        <Route path="/readAlbum/:id" element={<ReadAlbum />} />
       </Routes>
     </div>
   );
